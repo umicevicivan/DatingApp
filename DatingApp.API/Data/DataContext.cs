@@ -12,5 +12,6 @@ namespace DatingApp.API.Data
         
         //Ovo ime Values je ime tabele
         public DbSet<Value> Values { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
