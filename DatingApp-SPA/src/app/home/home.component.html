@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div *ngIf="!registerMode" style="text-align: center">
+    <h1>Find your match</h1>
+    <p class="lead">Come on in to view your matches... All you need to do is sign up!</p>
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
+      <button class="btn btn-info btn-lg">Learn more</button>
+    </div>
+  </div>
+
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <!-- 
+        Za komunikaciju parent -> child: ovaj "values" je promenljiva koja je u ovoj komponenti koju smo ucitali sa servera,
+        "valuesFromHome" je promenkljiva koja se nalazi u komponenti app-register, njoj pristupimo preko [] i kazemo da ona bude jednaka ovoj odavde
+        pored ovoga morali smo tamo u ovoj app-register da kazemo @Input() kako bi ona znala da ce vrednost dobili od parent komponente, i onda mozemo
+        tamo da je koristimo kao da smo je tamo i dobili. !!! trenutno se ovo ne koristi u programu ali stoji ovde i ne smeta
+        Za komunikaciju child -> parent: u child smo morali da namestimo @Output() i da napravimo event emiter, takodje u metodi da emitujemo taj event i u zagradama
+        da kazemo sta ce on da salje. Ovde (u parent komponenti) pristupamo preko obicnih zagrada promenljivoj iz deteta "cancelRegister" i posoto je ona event, ako se
+        sa njim nesto desi ovde ce da se uhvali, kada se desi event mi pokrecemo metodu "canclelRegisterMode" koja je definisana u parent komponenti i njoj proslednjujemo
+        kao ulazni paramter ono sto je event poslao (ovde je to slucaj "false"). -->
+
+        <app-register [valuesFromHome] = "values" (cancelRegister) = "cancelRegisterMode($event)"></app-register>     
+      </div>
+    </div>
+  </div>
+</div>
